@@ -284,7 +284,7 @@ in the dual-booting Linux system.</li>
 
 When dual booting with Windows, you need to:
 - Disabe fast boot and secure boot in BIOS.
-- If `/etc/grub.d/30_os_prober` or `/etc/default/grub.d/30_os_prober` exists, edit the line to `quick_boot="0"`.
+- If `/etc/grub.d/30_os_prober` or `/etc/default/grub.d/30_os_prober` exists, add or edit the line to `quick_boot="0"`.
 - `sudo vim /etc/default/grub`, you can configure GRUB there. Do not add the line `GRUB_DISABLE_OS_PROBER=true`.
 
 ### GRUB Menu
