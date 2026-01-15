@@ -99,6 +99,8 @@ Steps:
 
 Restarting the computer after using the methods below may further increase shrinkable volumes on Windows.
 
+You may turn them on back after shrinking volume.
+
 ### Turn off Fast Startup and Hibernation
 
 1. Press `Win`, type `cmd`, click `run as administrator`, and click `Yes`.
