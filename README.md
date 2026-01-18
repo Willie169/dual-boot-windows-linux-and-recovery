@@ -12,7 +12,6 @@ Instructions about dual-booting Windows (assumed Windows 11, may apply to Window
 * [Windows Bootloader Recovery on Dual-Boot with Intel VMD SSD](#windows-bootloader-recovery-on-dual-boot-with-intel-vmd-ssd)
 * [GRUB](#grub)
 * [Time Mismatches](#time-mismatches)
-* [Connect to WPA2 Enterprise PEAP MSCHAPV2 Network](#connect-to-wpa2-enterprise-peap-mschapv2-network)
 * [My Related Repositories](#my-related-repositories)
 
 ## Make Bootable Linux USB and Install Linux
@@ -329,37 +328,6 @@ If time mismatches real local time, run below in Linux:
 sudo timedatectl set-local-rtc 1
 sudo timedatectl set-ntp true
 ```
-
-## Connect to WPA2 Enterprise PEAP MSCHAPV2 Network
-
-### Symptom
-
-Cannot connect to WPA2 Enterprise PEAP MSCHAPV2 network (reportedly occurs on Ubuntu).
-
-### Solution
-
-<ol>
-<li>Try to connect to the network via <code>NetworkManager</code> or network settings in GUI with your credentials (which fails).</li>
-<li>Run
-<pre><code>nmcli con edit 'eduroam'
-</code></pre>
-to enter the nmcli shell. Replace <code>eduroam</code> with the SSID of the network you want to connect to.</li>
-<li>In the shell, run:
-<pre><code>set 802-1x.phase1-auth-flags
-</code></pre>
-run:
-<pre><code>tls-1-0-enable, tls-1-1-enable, tls-1-2-enable, tls-1-3-enable
-</code></pre>
-and run:
-<pre><code>save
-quit
-</code></pre></li>
-<li>Connect to the network again.</li>
-</ol>
-
-### References
-- <https://bugs.launchpad.net/ubuntu/+source/network-manager/+bug/2084553>
-- <https://discourse.gnome.org/t/wifi-connections-with-unsupported-tls-protocols-should-be-handled-better/17540>
 
 ## My Related Repositories
 
