@@ -347,7 +347,7 @@ to enter the nmcli shell. Replace <code>eduroam</code> with the SSID of the netw
 <li>In the shell, run:
 <pre><code>set 802-1x.phase1-auth-flags
 </code></pre>
-paste:
+run:
 <pre><code>tls-1-0-enable, tls-1-1-enable, tls-1-2-enable, tls-1-3-enable
 </code></pre>
 and run:
