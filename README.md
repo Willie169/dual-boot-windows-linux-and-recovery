@@ -78,7 +78,7 @@ Steps:
 2. Choose `Enroll MOK` and follow the prompts. Set a password if prompted.
 3. Reboot and enter the password in the blue MOK manager screen. If not prompted to set a password in the last step but prompted to enter a password here, use your `Secure Boot` password (which may be set in the installation process).
 
-### 6. If Stuck Before Login Page
+### 6. If Stuck Somewhere during Booting
 
 1. Force restarting the computer.
 2. If still stuck or anything is broken, reinstall with the bootable USB.
