@@ -80,7 +80,8 @@ Steps:
 
 ### 6. If Stuck Before Login Page
 
-Force restarting the computer.
+1. Force restarting the computer.
+2. If still stuck or anything is broken, reinstall with the bootable USB.
 
 ## Shrink Windows Drive Volume
 
