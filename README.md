@@ -72,11 +72,15 @@ Steps:
 2. Boot into the Linux bootable USB drive.
 3. You can install the Linux distribution now.
 
-### 5. When `Remove the installation medium and press ENTER` Does Not Work
+### 5. If Stuck at `Remove the installation medium and press ENTER`
 
 1. Force restarting the computer.
 2. Choose `Enroll MOK` and follow the prompts. Set a password if prompted.
 3. Reboot and enter the password in the blue MOK manager screen. If not prompted to set a password in the last step but prompted to enter a password here, use your `Secure Boot` password (which may be set in the installation process).
+
+### 6. If Stuck Before Login Page
+
+Force restarting the computer.
 
 ## Shrink Windows Drive Volume
 
