@@ -159,35 +159,38 @@ You may turn them on back after shrinking volume.
 
 ### Turn off Fast Startup and Hibernation
 
-1. Press `Win`, type `cmd`, click `run as administrator`, and click `Yes`.
+1. Press `Win`, type `cmd`, click `run as administrator` under **Command Prompt**, and click `Yes`.
 2. Type `powercfg /h on` and press `Enter`.
-3. Open `Control Panel`, search for `Power Options`, click `Choose what the power buttons do`, click `Change settings that are currently unavailable`.
-4. Uncheck `Turn on fast startup` and reboot your computer if `Turn on fast startup` is checked.
-5. Press `Win`, type `cmd`, click `run as administrator`, and click `Yes`.
-6. Type `powercfg /h off` and press `Enter`.
+2. Search for `Control Panel` in search bar and open it.
+2. Search for `Power Options`, click `Choose what the power buttons do`, click `Change settings that are currently unavailable`.
+2. Uncheck `Turn on fast startup` and reboot your computer if `Turn on fast startup` is originally checked.
+2. Press `Win`, type `cmd`, click `run as administrator` under **Command Prompt**, and click `Yes`.
+2. Type `powercfg /h off` and press `Enter`.
+2. Type `exit` and press `Enter`.
 
 ### Disable System Restore
 
 1. Search for `Control Panel` in search bar and open it.
 2. Search for `System`.
-3. Click `View advanced systems settings`.
-4. Click `System Protection`.
-5. Disable system restore for the drive.
+2. Click `View advanced systems settings`.
+2. Click `System Protection`.
+2. If any of the `Available Drives` has `Protection` set to `On`, click on it, click `Configure`, select `Disable system protection`, and select `OK`.
 
 ### Disable Paging Files
 
 1. Search for `Control Panel` in search bar and open it.
 2. Search for `System`.
-3. Click `View advanced systems settings`.
-4. Click `Advanced`.
-5. Click `Settings` under `Performance`.
-6. Click `Advanced`.
-7. Click `Change…` under `Virtual memory`.
-8. Uncheck `Automatically manage paging files size for all drives.
-9. Check `No paging file`, then `Set`.
-10. Click `Yes`.
-11. Click `Apply`, `OK`, then `OK`.
-12. Click `Restart now`.
+2. Click `View advanced systems settings`.
+2. Click `Advanced`.
+2. Click `Settings` under `Performance`.
+2. Click `Advanced`.
+2. Click `Change…` under `Virtual memory`.
+2. Uncheck `Automatically manage paging files size for all drives`.
+2. Select the drive.
+2. Check `No paging file`, then `Set`.
+2. Click `Yes`.
+2. Click `Apply`, `OK`, `OK`.
+2. Click `Restart now`.
 
 ### Disable Debugging Information Dump
 
@@ -197,14 +200,14 @@ You may turn them on back after shrinking volume.
 4. Click `Advanced`.
 5. Click `Settings` under `Startup and Recovery`.
 6. Expand the drop-down menu under `Write debugging information` and select `None`.
-7. Click ``OK`, then `OK`.
+7. Click `OK`, `OK`.
 
 ### Run Disk Cleanup
 
 1. Search for `Disk Cleanup` in search bar and open it.
 2. Select the drive.
 3. Click `Clean up system files`.
-4. Check the `Files to delete`.
+4. Check what you want to delete in the `Files to delete` list.
 5. Click `OK`.
 
 ### Defrag and Optimize Drives
@@ -215,6 +218,12 @@ You may turn them on back after shrinking volume.
 ### Reinstall Windows
 
 Refer to [Clean Windows Reinstallation with USB](#clean-windows-reinstallation-with-usb) section.
+
+### Third-Party Partition Manager
+
+You can use third-party partition manager such as [Paragon Partition Manager](https://www.paragon-software.com/free/pm-express).
+
+According to the author's experience, even if all methods above failed, Paragon Partition Manager still successes.
 
 ### References
 
