@@ -100,7 +100,7 @@ It is better to:
   - for GRUB, selecting `UEFI firmware settings` option in GRUB menu, or,
   - for Windows Boot Manager, holding the Shift key while selecting `Restart` and then going to `Troubleshoot` > `Advanced Options: UEFI Firmware Settings`.
 - If `/etc/grub.d/30_os_prober` or `/etc/default/grub.d/30_os_prober` exists, add or edit the line to `quick_boot="0"`.
-- `sudo vim /etc/default/grub`, you can configure GRUB there. Do not add the line `GRUB_DISABLE_OS_PROBER=true`.
+- Do not add the line `GRUB_DISABLE_OS_PROBER=true` in any GRUB configuration files if you want GRUB to detect Windows.
 
 ### GRUB Menu
 
@@ -110,18 +110,13 @@ It is better to:
 
 ### GRUB Configuration
 
-```
-sudo vim /etc/default/grub
-``` 
+You can edit GRUB configuration by`sudo vim /etc/default/grub`. Replace vim with the text editor you want to use, such as `nano`.
 
-to edit configuration, 
-
+You can apply changes in `/etc/default/grub`, `/etc/grub.d/`, and `/etc/default/grub.d/` by running:
 ```
 sudo update-grub
 sudo reboot
 ```
-
-to apply.
 
 Variables:
 
