@@ -387,7 +387,8 @@ The partition you choose should be about <code>300MB</code> in <code>size</code>
 </code></pre>
 You should see <code>Boot files successfully created</code>.</li>
 <li>Close <strong>Command Prompt</strong> and <strong>Windows 11 Setup</strong>. It will reboot automatically. Don't boot from the bootable Windows 11 USB. The bootable Windows 11 USB and the Driver drive can be removed now.</li>
-<li>Boot into Windows. It should load normally.
+<li>Boot into Windows. It should load normally.</li>
+</ol>
 
 ### 3. Remove Stale Windows Entry
 
