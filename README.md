@@ -221,9 +221,7 @@ Refer to [Clean Windows Reinstallation with USB](#clean-windows-reinstallation-w
 
 ### Third-Party Partition Manager
 
-You can use third-party partition manager such as [Paragon Partition Manager](https://www.paragon-software.com/free/pm-express).
-
-According to the author's experience, even if all methods above failed, Paragon Partition Manager still successes.
+You can use third-party partition manager such as [Paragon Partition Manager](https://www.paragon-software.com/free/pm-express). According to the author's experience, even if all methods above failed, Paragon Partition Manager still successes.
 
 ### References
 
