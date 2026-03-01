@@ -95,12 +95,29 @@ sudo update-grub
 in the dual-booting Linux system.
 
 It is better to:
-- Disabe **fast boot** and **secure boot** in BIOS menu. You can often access this menu by
-  - pressing a key while your PC is booting, such as F1, F2, F12, or Esc, or,
-  - for GRUB, selecting `UEFI firmware settings` option in GRUB menu, or,
-  - for Windows Boot Manager, holding the Shift key while selecting `Restart` and then going to `Troubleshoot` > `Advanced Options: UEFI Firmware Settings`.
-- If `/etc/grub.d/30_os_prober` or `/etc/default/grub.d/30_os_prober` exists, add or edit the line to `quick_boot="0"`.
-- Do not add the line `GRUB_DISABLE_OS_PROBER=true` in any GRUB configuration files if you want GRUB to detect Windows.
+<ul>
+<li>Disabe <strong>fast boot</strong> and <strong>secure boot</strong> in BIOS menu. You can often access this menu by
+<ul>
+<li>pressing a key while your PC is booting, such as F1, F2, F12, or Esc, or,</li>
+<li>for GRUB, selecting <code>UEFI firmware settings</code> option in GRUB menu, or,</li>
+<li>for Windows Boot Manager, holding the Shift key while selecting <code>Restart</code> and then going to <code>Troubleshoot</code> > <code>Advanced Options: UEFI Firmware Settings</code>.</li>
+</ul>
+</li>
+<li>If <code>/etc/grub.d/30_os-prober</code> or <code>/etc/default/grub.d/30_os-prober</code> exists, add or edit the line to <code>quick_boot="0"</code>. This can be done by running:
+<pre><code>for file in "/etc/grub.d/30_os-prober" "/etc/default/grub.d/30_os-prober"; do
+  if [[ -f "$file" ]]; then
+    if grep -q '^quick_boot=' "$file"; then
+      sudo sed -i 's/^quick_boot=.*/quick_boot="0"/' "$file"
+    else
+      echo 'quick_boot="0"' | sudo tee -a "$file"
+    fi
+  fi
+done
+sudo update-grub
+</code></pre>
+</li>
+<li>Do not add the line <code>GRUB_DISABLE_OS_PROBER=true</code> in any GRUB configuration files if you want GRUB to detect Windows.</li>
+</ul>
 
 ### GRUB Menu
 
