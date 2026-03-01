@@ -403,11 +403,18 @@ This attempts to solve the symptom that, after boot into **Windows Boot Manager*
 
 ## Time Mismatches
 
-If time mismatches real local time, run below in Linux:
-```
-sudo timedatectl set-local-rtc 1
+When dual-booting Linux and Windows, if either system's time mismatches local time, follow the steps below.
+
+<ol>
+<li>Run the command below in Linux:
+<pre><code>sudo timedatectl set-local-rtc 1
 sudo timedatectl set-ntp true
-```
+</code></pre>
+</li>
+<li>Reboot into Windows.</li>
+<li>Connect to the internet.</li>
+<li>Go to `Settings` > `Time & Language` > `Date & time` > `Additional settings` and click `Sync now`.</li>
+</ol>
 
 ## My Related Repositories
 
