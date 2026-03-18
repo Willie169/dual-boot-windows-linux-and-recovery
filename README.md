@@ -227,18 +227,29 @@ You may turn them on back after shrinking volume.
 1. Search for `Defrag and Optimize Drives` in search bar and open it.
 2. `Defrag` (for HDD) or `Optimize` (for SSD) the drive.
 
-### Reinstall Windows
+### Delete Recovery Partition
 
-Refer to [Clean Windows Reinstallation with USB](#clean-windows-reinstallation-with-usb) section.
+1. Press `Win`, type `cmd`, click `run as administrator` under **Command Prompt**, and click `Yes`.
+2. Type `diskpart` and press `Enter`.
+2. Type `list disk` and press `Enter`.
+2. Type `select disk 0` with `0` replaced with the actual disk and press `Enter`.
+2. Type `list partition` and press `Enter`.
+2. Type `select partition 5` with `5` replaced with the actual partition and press `Enter`.
+2. Type `delete partition override` and press `Enter`.
 
 ### Third-Party Partition Manager
 
 You can use third-party partition manager such as [Paragon Partition Manager](https://www.paragon-software.com/free/pm-express). According to the author's experience, even if all methods above failed, Paragon Partition Manager still successes.
 
+### Reinstall Windows
+
+Refer to [Clean Windows Reinstallation with USB](#clean-windows-reinstallation-with-usb) section.
+
 ### References
 
 - <https://chrunos.com/increase-shrinkable-space>
 - <https://www.thewindowsclub.com/shrink-volume-with-unmovable-files-in-windows>
+- <https://www.lifewire.com/delete-windows-recovery-partition-4128723>
 
 ## Intel Rapid Storage Technology (RST) VMD SSD Driver for Windows Reinstallation or Recovery
 
