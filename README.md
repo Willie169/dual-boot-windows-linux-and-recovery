@@ -104,14 +104,8 @@ It is better to:
 </ul>
 </li>
 <li>Replace all `quick_boot="1"` lines with `quick_boot="0"` in all files in `/etc/default/grub.d` and `/etc/grub.d`. This can be done by running:
-<pre><code>for file in "/etc/grub.d/*" "/etc/default/grub.d/*"; do
-  if [[ -f "$file" ]]; then
-    if grep -q '^quick_boot=' "$file"; then
-      sudo sed -i 's/^quick_boot=.*/quick_boot="0"/' "$file"
-    else
-      echo 'quick_boot="0"' | sudo tee -a "$file"
-    fi
-  fi
+<pre><code>for file in /etc/grub.d/* /etc/default/grub.d/*; do
+  [[ -f "$file" ]] && sudo sed -i 's/^quick_boot=.*/quick_boot="0"/' "$file"
 done
 sudo update-grub
 </code></pre>
