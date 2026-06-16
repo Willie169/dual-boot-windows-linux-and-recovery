@@ -103,8 +103,8 @@ It is better to:
 <li>for Windows Boot Manager, holding the Shift key while selecting <code>Restart</code> and then going to <code>Troubleshoot</code> > <code>Advanced Options: UEFI Firmware Settings</code>.</li>
 </ul>
 </li>
-<li>If <code>/etc/grub.d/30_os-prober</code> or <code>/etc/default/grub.d/30_os-prober</code> exists, add or edit the line to <code>quick_boot="0"</code>. This can be done by running:
-<pre><code>for file in "/etc/grub.d/30_os-prober" "/etc/default/grub.d/30_os-prober"; do
+<li>Replace all `quick_boot="1"` lines with `quick_boot="0"` in all files in `/etc/default/grub.d` and `/etc/grub.d`. This can be done by running:
+<pre><code>for file in "/etc/grub.d/*" "/etc/default/grub.d/*"; do
   if [[ -f "$file" ]]; then
     if grep -q '^quick_boot=' "$file"; then
       sudo sed -i 's/^quick_boot=.*/quick_boot="0"/' "$file"
