@@ -1,10 +1,11 @@
 # dual-boot-windows-linux-and-recovery
 
-Instructions about dual-booting Windows (assumed Windows 11, may apply to Windows 10 with few changes) and Linux, recovery of Windows and Linux, and related stuff.
+Instructions about dual-booting Windows and Linux, recovery of Windows and Linux, and related stuff.
 
 ## Table of Contents
 
 * [Make Bootable Linux USB and Install Linux](#make-bootable-linux-usb-and-install-linux)
+* [Ventoy](#ventoy)
 * [GRUB](#grub)
 * [Shrink Windows Drive Volume](#shrink-windows-drive-volume)
 * [Increase Shrinkable Volume on Windows](#increase-shrinkable-volume-on-windows)
@@ -23,36 +24,18 @@ Instructions about dual-booting Windows (assumed Windows 11, may apply to Window
 - A USB flash drive no less than typically 8 GB. **Any content on it will be deleted during the process**.
 - If you want to install Linux (instead of just trying it), disk partition(s) on PC you want to install Linux on. **Any content on them will be deleted during the process**.
 
+Go to [Ventoy](#ventoy) for making bootable USB with Ventoy.
+
 ### 1. Download ISO
 
 Download ISO file of the Linux distribution you want.
 
-### 2. Flash OS to Flash Drive (Balena Etcher for example)
+### 2. Flash OS to Flash Drive
 
-Download a software that can flash OS to flash drive. Take Balena Etcher for example.
-
-#### 1. Download
-
-Download **balena-etcher_*_amd64.deb** from the lastest release of <https://github.com/balena-io/etcher>.
-
-#### 2. Installation
-
-```
-sudo apt install ./balena-etcher_*_amd64.deb -y
-rm balena-etcher_*_amd64.deb
-```
-
-#### 3. Open Balena Etcher
-
-```
-balena-etcher
-```
-
-#### 4. Flash
-
-1. Plug in a USB flash drive. **Any content on it will be deleted**.
-2. Select the file and drive you want.
-3. Flash.
+1. Download a software that can flash OS to flash drive.
+2. Plug in a USB flash drive. **Any content on it will be deleted**.
+3. Select the file and drive you want in flashing software.
+4. Flash.
 
 ### 3. Try the Linux Distribution
 
@@ -64,7 +47,7 @@ balena-etcher
 
 Notes:
 
-1. It is recommended (or required for some distributions and installation options) to connect to Wi-Fi.
+1. It is recommended (or required for some distributions and installation options) to connect to Wi-Fi. If you fail to connect to a WPA PEAP Network that you are supposed to be able to connect to, it may be due to deprecated TLS protocols and can be fixed by according to my [**WPA-PEAP-TLS-network-Linux**](https://github.com/Willie169/WPA-PEAP-TLS-network-Linux) repo.
 2. It is recommended (or required for some distributions and installation options) to disable Fast Startup (if any) in UEFI before installation.
 
 Steps:
@@ -83,6 +66,54 @@ Steps:
 
 1. Force restarting the computer.
 2. If still stuck or anything is broken, reinstall with the bootable USB.
+
+## Ventoy
+
+### Introduction
+
+Ventoy is an open source tool to create bootable USB drive for ISO/WIM/IMG/VHD(x)/EFI files. With Ventoy, you don't need to format the disk over and over, just copy the image files to the USB drive and boot them. You can copy many image files at a time and Ventoy will give you a boot menu to select them. You can also browse ISO/WIM/IMG/VHD(x)/EFI files in local disk and boot them.
+
+For more information, refer to <https://www.ventoy.net/en/doc_start.html> and <https://github.com/ventoy/Ventoy>.
+
+### Requirements
+
+- Internet connection.
+- A USB flash drive no less than typically 8 GB. **Any content on it will be deleted during the process**.
+
+### Ventoy CLI on Linux
+
+1. Plug the USB drive you want to install Ventoy on. Run `lsblk -o NAME,SIZE,MODEL,TRAN` and find it. We will use `/dev/sda` as placeholder for it. Replace `/dev/sda` with your actual drive.
+2. Prepare the image(s) (typically ISO) you want to put into Ventoy. There can be multiple images, but be sure that their total size is less than that of the drive. (The size of Ventoy is no more than 32 MB.)
+2. Go to <https://github.com/ventoy/Ventoy/releases>. Download `ventoy-*-linux.tar.gz`.
+2. Install Ventoy to the drive. **Any content on it will be deleted**.
+  ```
+  tar -xzf ventoy-*-linux.tar.gz
+  cd ventoy-*
+  sudo ./Ventoy2Disk.sh -i /dev/sda
+  ```
+2. Your drive will now mount as a normal drive named Ventoy. Copy the images to it normally.
+
+### Ventoy GUI on Linux
+
+1. Go to <https://github.com/ventoy/Ventoy/releases>. Download `ventoy-*-linux.tar.gz`.
+2. Launch Ventoy GUI. `aarch64`, `i386`, `mips64el`, and `x86_64` are available. Replace `x86_64` below with architecture of your device.
+  ```
+  tar -xzf ventoy-*-linux.tar.gz
+  cd ventoy-*
+  sudo ./VentoyGUI.x86_64
+  ```
+2. Select the drive in GUI and install Ventoy to it. **Any content on it will be deleted**.
+
+### Ventoy GUI on Windows
+
+1. Go to <https://github.com/ventoy/Ventoy/releases>. Download `ventoy-*-windows.zip`.
+2. Extract it and go into the directory.
+2. Execute `Ventoy2Disk.exe` as administrator to launch Ventoy GUI if you are on 32-bit or 64-bit Windows PC with Intel or AMD CPU. `Ventoy2Disk_X64.exe`, `Ventoy2Disk_ARM.exe`, and `Ventoy2Disk_ARM64.exe` are also available in `altexe` directory. Move to the upper directory (same location with `Ventoy2Disk.exe`) to use them.
+2. Select the drive in GUI and install Ventoy to it. **Any content on it will be deleted**.
+
+### Ventoy CLI on Windows
+
+Please refer to <https://www.ventoy.net/en/doc_windows_cli.html>.
 
 ## GRUB
 
@@ -443,3 +474,4 @@ sudo timedatectl set-ntp true
 * [**ubuntu-setup-with-vnc-and-gpu**](https://github.com/Willie169/ubuntu-setup-with-vnc-and-gpu)
 * [**switch-firefox-from-snap-to-deb**](https://github.com/Willie169/switch-firefox-from-snap-to-deb)
 * [**LinuxAndTermuxTips**](https://github.com/Willie169/LinuxAndTermuxTips)
+* [**WPA-PEAP-TLS-network-Linux**](https://github.com/Willie169/WPA-PEAP-TLS-network-Linux)
