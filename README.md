@@ -294,6 +294,7 @@ These files can be obtained from <https://github.com/sispt/Intel-Rapid-Storage-T
 ```
 git clone https://github.com/sispt/Intel-Rapid-Storage-Technology-RST-VMD-Drivers-Extracted
 ```
+A copy of the repo is cloned inside this repo solely for archiving purposes and is subjected to its own copyright status.
 
 Copy the driver folder you need to the drive. If not sure, copy all driver folders and select the compatible ones latter during Windows reinstallation or recovery.
 
