@@ -4,6 +4,7 @@ Instructions about dual-booting Windows and Linux, recovery of Windows and Linux
 
 ## Table of Contents
 
+* [Shutdown and Reboot Windows without Update](#shutdown-and-reboot-windows-without-update)
 * [BIOS / UEFI](#bios-uefi)
 * [BIOS / UEFI Update](#bios-uefi-update)
 * [Make Bootable Linux USB and Install Linux](#make-bootable-linux-usb-and-install-linux)
@@ -17,6 +18,13 @@ Instructions about dual-booting Windows and Linux, recovery of Windows and Linux
 * [Windows Bootloader Recovery](#windows-bootloader-recovery)
 * [Time Mismatches](#time-mismatches)
 * [My Related Repositories](#my-related-repositories)
+
+## Shutdown and Reboot Windows without Update
+
+Press `Win`, type `cmd`, click `run as administrator` under **Command Prompt**, and click `Yes`.
+
+- To shutdown, type `shutdown /s /t 0` and hit Enter.
+- To reboot, type `shutdown /r /t 0` and hit Enter.
 
 ## BIOS / UEFI
 
