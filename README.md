@@ -36,17 +36,21 @@ Unless you are using an older device, when referring to BIOS, people are really 
 
 ### Enter BIOS
 
-Press `Del` constantly when booting to enter BIOS. Some manufacturers may require different key such as F1, F2, F10, F12, ENTER, or ESC.
+Press `Del` constantly when booting to enter BIOS. Some manufacturers may require a different key such as F1, F2, F10, F12, ENTER, or ESC.
 
 For GRUB, you may also enter BIOS by selecting `UEFI firmware settings` option in GRUB menu.
 
 For Windows Boot Manager, you may also enter BIOS by holding the Shift key while selecting `Restart` and then going to `Troubleshoot > Advanced Options: UEFI Firmware Settings`.
 
+### Save and Exit
+
+In Save & Exit page, you can save or discard changes and exit.
+
 ### Boot Order Priorities
 
 You can adjust boot order priorities in Boot page.
 
-Hereafter, booting into a USB means adjusting the first boot option of boot order priorities here to USB Hard Disk or similar entry and rebooting.
+Hereafter, booting into a USB means adjusting the first boot option of boot order priorities here to USB Hard Disk or similar entry and saving changes and exiting.
 
 ### Fast Boot
 
