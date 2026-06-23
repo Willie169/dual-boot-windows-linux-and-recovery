@@ -4,6 +4,8 @@ Instructions about dual-booting Windows and Linux, recovery of Windows and Linux
 
 ## Table of Contents
 
+* [BIOS / UEFI](#bios-uefi)
+* [BIOS / UEFI Update](#bios-uefi-update)
 * [Make Bootable Linux USB and Install Linux](#make-bootable-linux-usb-and-install-linux)
 * [Ventoy](#ventoy)
 * [GRUB](#grub)
@@ -16,15 +18,119 @@ Instructions about dual-booting Windows and Linux, recovery of Windows and Linux
 * [Time Mismatches](#time-mismatches)
 * [My Related Repositories](#my-related-repositories)
 
-## Make Bootable Linux USB and Install Linux
+## BIOS / UEFI
+
+**Some manufacturers may have different procedures and interfaces. Refer to your manufacturer when guides don't apply.**
+
+### UEFI
+
+Unless you are using an older device, when referring to BIOS, people are really talking about a newer interface called UEFI or Unified Extensible Firmware Interface. But for simplicity's sake, we'll continue to use BIOS to refer to UEFI.
+
+### Enter BIOS
+
+Press `Del` constantly when booting to enter BIOS. Some manufacturers may require different key such as F1, F2, F10, F12, ENTER, or ESC.
+
+For GRUB, you may also enter BIOS by selecting `UEFI firmware settings` option in GRUB menu.
+
+For Windows Boot Manager, you may also enter BIOS by holding the Shift key while selecting `Restart` and then going to `Troubleshoot > Advanced Options: UEFI Firmware Settings`.
+
+### Boot Order Priorities
+
+You can adjust boot order priorities in Boot page.
+
+Hereafter, booting into a USB means adjusting the first boot option of boot order priorities here to USB Hard Disk or similar entry.
+
+### Fast Boot
+
+You can toggle fast boot in Boot page.
+
+### Secure Boot
+
+You can toggle secure boot in Security page. It's recommended to turn it off when dual booting.
+
+### TPM / Trusted Computing
+
+You can toggle TPM / trusted computing in Security page.
+
+### IOMMU / VT-x / VT-d
+
+For PCI passthrough, enable IOMMU (for AMD) or VT-x (for some Intel) or VT-d (for some Intel) in Advanced page. Refer to [Arch Wiki](https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF) and [VFIO subreddit wiki](https://www.reddit.com/r/VFIO/wiki) for more information.
+
+## BIOS Update
+
+**Some manufacturers may have different procedures and interfaces. Refer to your manufacturer when guides don't apply.**
 
 ### 0. Requirements
 
-- Internet connection.
+- Ensure AC power is plugged in or battery is enough.
+- A bootable Linux or Windows USB or installed system.
+- A USB flash drive. **Any content on it will be deleted during the process**.
+
+### 1. Find System Information
+
+Find the manufacturer, product name, and current BIOS version of your device.
+
+For installed Linux, run
+```
+sudo dmidecode -s system-manufacturer
+sudo dmidecode -s system-product-name
+sudo dmidecode -s bios-version
+```
+Example output:
+```
+Micro-Star International Co., Ltd.
+Thin 15 B13UC
+E16R8IMS.704
+```
+For installed Windows, press Windows key. Search for `System Information` and open the app.
+
+### 2. Prepare BIOS File
+
+Go to your manufacturer's site, search for your product, and find the latest BIOS file for your **exact product name**. Extract it (if compressed). For Linux, typically run `unzip` or use GUI. For Window, typically right-click, click `Extract All...`, and click `Extract`.
+
+Example: Go to <https://www.msi.com/Laptop/Thin-15-B13UX/support?sub_product=Thin-15-B13UC>, download `E16R8IMS.70D.zip`, and run:
+```
+cd ~/Downloads
+unzip E16R8IMS.70D.zip
+```
+
+### 3. Create BIOS USB
+
+<ol>
+<li>Plug in the USB.</li>
+<li>Format it to FAT32 format. <strong>Any content on it will be deleted</strong>. For Linux, find its name by running:<pre><code>lsblk -o NAME,SIZE,MODEL,TRAN,MOUNTPOINTS
+</code></pre>(example name: <code>/dev/sda</code>), and format it to FAT32 by running:<pre><code>sudo mkfs.vfat -F32 -I <usb_name>
+</code></pre>Example:<pre><code>sudo mkfs.vfat -F32 -I /dev/sda
+</code></pre>For Windows, open `File Explorer`, right-click on the USB drive, click <code>Format...</code>, select <code>FAT32</code> and click <code>Start</code>.</li>
+<li>Mount it and copy the BIOS file to it. Example:<pre><code>cp ~/Downloads/E16R8IMS.70D/E16R8IMS.70D /run/media/$USER/15B4-9041/
+</code></pre></li>
+</ol>
+
+### 4. BIOS Update
+
+1. Reboot and enter BIOS. Go to [BIOS / UEFI](#bios-uefi) for more information.
+2. Go to `Advanced > UEFI BIOS Update` or `M-FLASH`.
+3. In `Select File system`, select your USB, typically `Acpi(A0341D0, 0)\PCI(14|0)\USB(0,0)\` or something similar.
+4. In `Select File`, select your BIOS file.
+5. Press `Yes`. Press `Ok`. Wait.
+6. Press `Proceed with flash update`. Wait. Press any key. Wait.
+
+### 5. Check BIOS Version
+
+For installed Linux, run:
+```
+sudo dmidecode -s bios-version
+```
+For installed Windows, press Windows key. Search for `System Information` and open the app.
+
+## Make Bootable Linux USB and Install Linux
+
+This section is about normal bootable Linux USB. Go to [Ventoy](#ventoy) for making bootable USB with Ventoy.
+
+### 0. Requirements
+
 - A USB flash drive no less than typically 8 GB. **Any content on it will be deleted during the process**.
 - If you want to install Linux (instead of just trying it), disk partition(s) on PC you want to install Linux on. **Any content on them will be deleted during the process**.
-
-Go to [Ventoy](#ventoy) for making bootable USB with Ventoy.
 
 ### 1. Download ISO
 
@@ -40,7 +146,7 @@ Download ISO file of the Linux distribution you want.
 ### 3. Try the Linux Distribution
 
 1. Reboot your computer.
-2. Boot into the Linux bootable USB drive.
+2. Boot into the Linux bootable USB drive. Go to [BIOS / UEFI](#bios-uefi) for more information.
 3. You can try the Linux distribution now.
 
 ### 4. Install the Linux Distribution
@@ -115,6 +221,10 @@ For more information, refer to <https://www.ventoy.net/en/doc_start.html> and <h
 
 Please refer to <https://www.ventoy.net/en/doc_windows_cli.html>.
 
+### Use Ventoy USB
+
+Boot into it. You can select the image and mode you want to boot. In normal mode, it behaves the same as a normal live USB. Go to [BIOS / UEFI](#bios-uefi) for more information.
+
 ## GRUB
 
 ### Dual Booting Linux and Windows
@@ -127,13 +237,7 @@ in the dual-booting Linux system.
 
 It is better to:
 <ul>
-<li>Disabe <strong>fast boot</strong> and <strong>secure boot</strong> in BIOS menu. You can often access this menu by
-<ul>
-<li>pressing a key while your PC is booting, such as F1, F2, F12, or Esc, or,</li>
-<li>for GRUB, selecting <code>UEFI firmware settings</code> option in GRUB menu, or,</li>
-<li>for Windows Boot Manager, holding the Shift key while selecting <code>Restart</code> and then going to <code>Troubleshoot</code> > <code>Advanced Options: UEFI Firmware Settings</code>.</li>
-</ul>
-</li>
+<li>Disabe <strong>secure boot</strong> in BIOS menu. Go to <a href="#bios-uefi">BIOS / UEFI</a> for more information.</li>
 <li>Replace all `quick_boot="1"` lines with `quick_boot="0"` in all files in `/etc/default/grub.d` and `/etc/grub.d`. This can be done by running:
 <pre><code>for file in /etc/grub.d/* /etc/default/grub.d/*; do
   [[ -f "$file" ]] && sudo sed -i 's/^quick_boot=.*/quick_boot="0"/' "$file"
@@ -304,7 +408,7 @@ Copy the driver folder you need to the drive. If not sure, copy all driver folde
 
 - Internet connection.
 - A USB flash drive no less than typically 8 GB. **Any content on it will be deleted during the process**.
-- Activated Windows on your PC. **Any content on the partition you want to install Windows on will be deleted during the process**.
+- Windows on your PC. If activated, the activation will be inherited by the reinstallation. **Any content on the partition you want to install Windows on will be deleted during the process**.
 - If the partition you want to install Windows on is on an Intel Rapid Storage Technology (RST) VMD SSD, you nend another drive with compatible Intel Rapid Storage Technology (RST) VMD Driver (unzipped). No data in it will be erased. Hereafter referred to as Driver drive. Refer to [Intel Rapid Storage Technology (RST) VMD SSD Driver for Windows Reinstallation or Recovery](#intel-rapid-storage-technology-rst-vmd-ssd-driver-for-windows-reinstallation-or-recovery) about how to make one.
 - You may need a phone with internet connection and a cable that can connect your PC and your phone.
 
@@ -367,24 +471,44 @@ If the partition you want to install Windows on is detected, select it and press
 
 This guide explains how to use **TestDisk** to recover lost or corrupted partitions, without damaging your existing data.
 
+**WARNING: It is quite possible and even probable that, if you follow any of the steps described below without fully understanding them, you will worsen your situation.**
+
 ### 0. Requirements
 
-- Bootable Linux USB or installed Linux system (hereafer referred to as bootable Linux) of any distro with TestDisk installable.
+A bootable DOS, Windows, Linux, FreeBSD, NetBSD, OpenBSD, SunOS or MacOS.
 
-### 1. TestDisk Partition Table Recovery
+### 1. Install TestDisk
+
+For Debian derivatives:
+```
+sudo apt install testdisk
+```
+For Fedora derivatives:
+```
+sudo dnf install testdisk
+```
+For Arch derivatives:
+```
+sudo pacman -S testdisk
+```
+For MacOS:
+```
+brew install testdisk
+```
+For others: Download in <https://www.cgsecurity.org/wiki/TestDisk_Download>.
+
+### 2. TestDisk Partition Table Recovery
 
 > **Important:** Do not write to the disk until you are sure of the recovered partitions.
 
-1. Boot into the bootable Linux.
-2. Install TestDisk (`sudo apt install testdisk` on Debian derivatives).
-3. Run: `sudo testdisk`.
-4. Select `Create` to make a new log file.
-5. TestDisk will list all available disks. Use arrow keys to select the disk you want to recover and press `Enter`.
-6. Select Partition Table Type, GPT for modern UEFI systems and Intel/PC for legacy MBR. Usually, TestDisk automatically detects the partition table type. Confirm the selection and press `Enter`.
-7. Select `Analyse` and press `Enter`.
-8. Select `Quick Search` and press `Enter`.
-9. Wait for TestDisk to scan for partitions. If some partitions are missing or incorrect, select Deeper Search.
-10. TestDisk will list all partitions it finds, showing, `Start` and `End` sectors, `Size`, `Label` (if available), etc. Navigate through detected partitions:
+1. For Linux and MacOS, run `sudo testdisk`. For Windows, excute the TestDisk executable as Administrator.
+2. Select `Create` to make a new log file.
+3. TestDisk will list all available disks. Use arrow keys to select the disk you want to recover and press `Enter`.
+4. Select Partition Table Type, GPT for modern UEFI systems and Intel/PC for legacy MBR. Usually, TestDisk automatically detects the partition table type. Confirm the selection and press `Enter`.
+5. Select `Analyse` and press `Enter`.
+6. Select `Quick Search` and press `Enter`.
+7. Wait for TestDisk to scan for partitions. If some partitions are missing or incorrect, select Deeper Search.
+8. TestDisk will list all partitions it finds, showing, `Start` and `End` sectors, `Size`, `Label` (if available), etc. Navigate through detected partitions:
   - P: List files to check if data is accessible
   - Left/Right arrow keys: Change partition type:
     - `P`: Primary
@@ -392,12 +516,12 @@ This guide explains how to use **TestDisk** to recover lost or corrupted partiti
     - `L`: Load backup
     - `T`: Change file system type (only if incorrect)
 Change all wanted partitions to primary. Ensure the partition structure has no overlap (`ok` in bottom left) and match your original setup.
-11. Select `Write`, press `Enter`, and confirm by typing `Y`. TestDisk will write the new partition table to disk.
-12. Close TestDisk and reboot the system. Check that every dual-boot system can be booted correctly.
-13. If Windows does not boot, refer to [Windows Bootloader Recovery on Dual-Boot with Intel VMD SSD](#windows-bootloader-recovery-on-dual-boot-with-intel-vmd-ssd) section.
+9. Select `Write`, press `Enter`, and confirm by typing `Y`. TestDisk will write the new partition table to disk.
+10. Close TestDisk and reboot the system. Check that every dual-boot system can be booted correctly.
+11. If Windows does not boot, refer to [Windows Bootloader Recovery on Dual-Boot with Intel VMD SSD](#windows-bootloader-recovery-on-dual-boot-with-intel-vmd-ssd) section.
 
 Notes:
--  Always verify partitions using `lsblk -f` or `fdisk -l` before writing.
+-  Always verify partitions before writing. For Linux, use `lsblk -f` or `fdisk -l`.
 - Keep the original disk untouched until you are confident in the recovered layout.
 - If unsure about the detected partition start/end, list files (P) to confirm.
 - Recovery can leave unallocated gaps. You can later merge them with other partitions or create new ones.
