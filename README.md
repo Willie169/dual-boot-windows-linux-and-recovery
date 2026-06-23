@@ -46,7 +46,7 @@ For Windows Boot Manager, you may also enter BIOS by holding the Shift key while
 
 You can adjust boot order priorities in Boot page.
 
-Hereafter, booting into a USB means adjusting the first boot option of boot order priorities here to USB Hard Disk or similar entry.
+Hereafter, booting into a USB means adjusting the first boot option of boot order priorities here to USB Hard Disk or similar entry and rebooting.
 
 ### Fast Boot
 
