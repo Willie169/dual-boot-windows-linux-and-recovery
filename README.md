@@ -200,27 +200,29 @@ For more information, refer to <https://www.ventoy.net/en/doc_start.html> and <h
 
 ### Ventoy CLI on Linux
 
-1. Plug the USB drive you want to install Ventoy on. Run `lsblk -o NAME,SIZE,MODEL,TRAN` and find it. We will use `/dev/sda` as placeholder for it. Replace `/dev/sda` with your actual drive.
-2. Prepare the image(s) (typically ISO) you want to put into Ventoy. There can be multiple images, but be sure that their total size is less than that of the drive. (The size of Ventoy is no more than 32 MB.)
-2. Go to <https://github.com/ventoy/Ventoy/releases>. Download `ventoy-*-linux.tar.gz`.
-2. Install Ventoy to the drive. **Any content on it will be deleted**.
-  ```
-  tar -xzf ventoy-*-linux.tar.gz
-  cd ventoy-*
-  sudo ./Ventoy2Disk.sh -i /dev/sda
-  ```
-2. Your drive will now mount as a normal drive named Ventoy. Copy the images to it normally.
+<ol>
+<li>Plug the USB drive you want to install Ventoy on. Run <code>lsblk -o NAME,SIZE,MODEL,TRAN</code> and find it. We will use <code>/dev/sda</code> as placeholder for it. Replace <code>/dev/sda</code> with your actual drive.</li>
+<li>Prepare the image(s) (typically ISO) you want to put into Ventoy. There can be multiple images, but be sure that their total size is less than that of the drive. (The size of Ventoy is no more than 32 MB.)</li>
+<li>Go to <a href="https://github.com/ventoy/Ventoy/releases">https://github.com/ventoy/Ventoy/releases</a>. Download <code>ventoy-*-linux.tar.gz</code>.</li>
+<li>Install Ventoy to the drive. <strong>Any content on it will be deleted</strong>.
+<pre><code>tar -xzf ventoy-*-linux.tar.gz
+cd ventoy-*
+sudo ./Ventoy2Disk.sh -i /dev/sda
+</code></pre></li>
+<li>Your drive will now mount as a normal drive named Ventoy. Copy the images to it normally.</li>
+</ol>
 
 ### Ventoy GUI on Linux
 
-1. Go to <https://github.com/ventoy/Ventoy/releases>. Download `ventoy-*-linux.tar.gz`.
-2. Launch Ventoy GUI. `aarch64`, `i386`, `mips64el`, and `x86_64` are available. Replace `x86_64` below with architecture of your device.
-  ```
-  tar -xzf ventoy-*-linux.tar.gz
-  cd ventoy-*
-  sudo ./VentoyGUI.x86_64
-  ```
-2. Select the drive in GUI and install Ventoy to it. **Any content on it will be deleted**.
+<ol>
+<li>Go to <a href="https://github.com/ventoy/Ventoy/releases">https://github.com/ventoy/Ventoy/releases</a>. Download <code>ventoy-*-linux.tar.gz</code>.</li>
+<li>Launch Ventoy GUI. <code>aarch64</code>, <code>i386</code>, <code>mips64el</code>, and <code>x86_64</code> are available. Replace <code>x86_64</code> below with architecture of your device.
+<pre><code>tar -xzf ventoy-*-linux.tar.gz
+cd ventoy-*
+sudo ./VentoyGUI.x86_64
+</code></pre></li>
+<li>Select the drive in GUI and install Ventoy to it. <strong>Any content on it will be deleted</strong>.</li>
+</ol>
 
 ### Ventoy GUI on Windows
 
@@ -613,4 +615,3 @@ sudo timedatectl set-ntp true
 * [**LinuxAndTermuxTips**](https://github.com/Willie169/LinuxAndTermuxTips)
 * [**WPA-PEAP-TLS-network-Linux**](https://github.com/Willie169/WPA-PEAP-TLS-network-Linux)
 * [**btrfs-debian-ubuntu**](https://github.com/Willie169/btrfs-debian-ubuntu)
-
